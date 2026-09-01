@@ -1,0 +1,249 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const LifeGardApp());
+}
+
+class LifeGardApp extends StatelessWidget {
+  const LifeGardApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Life Gard',
+      theme: ThemeData(
+        primarySwatch: Colors.green,
+        useMaterial3: true,
+      ),
+      home: const HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Life Gard',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const SizedBox(height: 30),
+
+            const Icon(
+              Icons.health_and_safety,
+              size: 90,
+              color: Colors.green,
+            ),
+
+            const SizedBox(height: 15),
+
+            const Text(
+              'Life Gard',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 32,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+
+            const SizedBox(height: 8),
+
+            const Text(
+              'Your Health, Our Priority',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 16),
+            ),
+
+            const SizedBox(height: 45),
+
+            ElevatedButton.icon(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const PharmacyPage(),
+                  ),
+                );
+              },
+              icon: const Icon(Icons.local_pharmacy),
+              label: const Text(
+                'Pharmacy',
+                style: TextStyle(fontSize: 18),
+              ),
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.all(18),
+              ),
+            ),
+
+            const SizedBox(height: 20),
+
+            ElevatedButton.icon(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const HospitalPage(),
+                  ),
+                );
+              },
+              icon: const Icon(Icons.local_hospital),
+              label: const Text(
+                'Hospital',
+                style: TextStyle(fontSize: 18),
+              ),
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.all(18),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class PharmacyPage extends StatelessWidget {
+  const PharmacyPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Pharmacies'),
+      ),
+      body: ListView(
+        padding: const EdgeInsets.all(16),
+        children: [
+          pharmacyCard(
+            context,
+            'Life Care Pharmacy',
+            'Open • Medicine available',
+            'Call Pharmacy',
+          ),
+          pharmacyCard(
+            context,
+            'Health Plus Pharmacy',
+            'Open • Home delivery',
+            'Call Pharmacy',
+          ),
+          pharmacyCard(
+            context,
+            'Medi World Pharmacy',
+            'Open • Fast delivery',
+            'Call Pharmacy',
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget pharmacyCard(
+    BuildContext context,
+    String name,
+    String details,
+    String buttonText,
+  ) {
+    return Card(
+      margin: const EdgeInsets.only(bottom: 15),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              name,
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(details),
+            const SizedBox(height: 12),
+            Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton.icon(
+                    onPressed: () {},
+                    icon: const Icon(Icons.phone),
+                    label: Text(buttonText),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed: () {},
+                    child: const Text('Order Now'),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class HospitalPage extends StatelessWidget {
+  const HospitalPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Hospitals'),
+      ),
+      body: ListView(
+        padding: const EdgeInsets.all(16),
+        children: [
+          hospitalCard(
+            'City Care Hospital',
+            '24/7 Emergency • ICU Available',
+          ),
+          hospitalCard(
+            'Life Hospital',
+            'Emergency • General Medicine',
+          ),
+          hospitalCard(
+            'Green Valley Hospital',
+            '24/7 Service • Ambulance Available',
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget hospitalCard(String name, String details) {
+    return Card(
+      margin: const EdgeInsets.only(bottom: 15),
+      child: ListTile(
+        leading: const Icon(
+          Icons.local_hospital,
+          size: 40,
+          color: Colors.red,
+        ),
+        title: Text(
+          name,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        subtitle: Text(details),
+        trailing: const Icon(Icons.arrow_forward_ios),
+      ),
+    );
+  }
+}
